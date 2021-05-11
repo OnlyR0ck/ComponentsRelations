@@ -1,0 +1,20 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="InconsistentLineSeparators" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="LongLine" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="Misra" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="OCInconsistentNaming" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="OCUnusedConcept" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="OCUnusedGlobalDeclaration" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="OCUnusedIncludeDirective" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="OCUnusedMacro" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="OCUnusedStruct" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="OCUnusedTemplateParameter" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="OCUnusedTypeAlias" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ProblematicWhitespace" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TodoComment" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnconstrainedVariableType" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnusedExpressionResult" enabled="true" level="ERROR" enabled_by_default="true" />
+  </profile>
+</component>
