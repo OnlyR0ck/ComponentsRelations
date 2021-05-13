@@ -1,16 +1,20 @@
 #include "Menu.h"
 #include "Scene.h"
 #include "Database.h"
-
+#include <pchannel.h>
+#include <iostream>
 
 void sign_up();
 void sign_in();
 
 int main()
 {
+	SetConsoleCP(866);
+	SetConsoleOutputCP(866);
+
 	Menu menu;
-	menu.add(sign_up, "Зарегестрироваться.");
-	menu.add(sign_in, "Войти.");
+	menu.add(sign_up, "Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ.");
+	menu.add(sign_in, "Р’РѕР№С‚Рё.");
 	menu.start();
 	return 0;
 }
@@ -21,13 +25,14 @@ void sign_up()
 	User user;
 	std::string temp;
 
-	std::cout << "Введите имя пользователя: ";
+	std::cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ: ";
 	std::cin >> temp;
 	user.set_name(temp);
 
-	std::cout << "\nВведите пароль: ";
+	std::cout << "\nР’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ: ";
 	std::cin >> temp;
 	user.set_password(temp);
+	user.set_password(Hash::hash_function(user.get_password()));
 	database->add_user(user);
 }
 
@@ -37,18 +42,26 @@ void sign_in()
 	User user;
 	std::string temp;
 
-	std::cout << "Введите имя пользователя: ";
+	std::cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ: ";
 	std::cin >> temp;
 	user.set_name(temp);
 
-	std::cout << "\nВведите пароль: ";
+	std::cout << "\nР’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ: ";
 	std::cin >> temp;
 	user.set_password(temp);
-
-	if(database->check_user(user))
+	if (user.get_name() == "admin" && user.get_password() == "admin")
 	{
-		//Need to share user and check permissions
-		//Scene::get_instance()->start();
+		user.set_permissions(admin);
+		Scene::get_instance()->start(user);
+		return;
+	}
+	
+	user.set_password(Hash::hash_function(user.get_password()));
+
+	if (database->check_user(user))
+	{
 		std::cout << "Sign in successfully" << std::endl;
+		//Need to share user and check permissions
+		Scene::get_instance()->start(user);
 	}
 }

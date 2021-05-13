@@ -54,9 +54,9 @@ namespace Core
 
 		try
 		{
-			if (mComponentTypes.find(typeName) != mComponentTypes.end())
+			if (mComponentTypes.find(typeName) == mComponentTypes.end())
 			{
-				throw std::runtime_error("Компонент не был зарегистрирован ранее.");
+				throw std::runtime_error("РљРѕРјРїРѕРЅРµРЅС‚ РЅРµ Р±С‹Р» Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ РїРµСЂРµРґ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј.");
 			}
 		}
 		catch (std::runtime_error& error)
@@ -73,9 +73,9 @@ namespace Core
 		const char* typeName = typeid(T).name();
 		try
 		{
-			if (mComponentTypes.find(typeName) == mComponentTypes.end())
+			if (mComponentTypes.find(typeName) != mComponentTypes.end())
 			{
-				throw std::runtime_error("Данный компонент уже зарегистрирован.");
+				throw std::runtime_error("РљРѕРјРїРѕРЅРµРЅС‚ СѓР¶Рµ Р±С‹Р» Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ.");
 			}
 		}
 		catch (std::runtime_error& error)
@@ -83,7 +83,7 @@ namespace Core
 			std::cout << error.what() << std::endl;
 		}
 
-		
+
 		mComponentTypes.insert({ typeName, mNextComponentType });
 		mComponentArrays.insert({ typeName, std::make_shared<ComponentArray<T>>() });
 
@@ -97,9 +97,9 @@ namespace Core
 
 		try
 		{
-			if (mComponentTypes.find(typeName) != mComponentTypes.end())
+			if (mComponentTypes.find(typeName) == mComponentTypes.end())
 			{
-				throw std::runtime_error("Компонент не был зарегистрирован ранее.");
+				throw std::runtime_error("РљРѕРјРїРѕРЅРµРЅС‚ РЅРµ Р±С‹Р» Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ РїРµСЂРµРґ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј.");
 			}
 		}
 		catch (std::runtime_error& error)
@@ -125,7 +125,14 @@ namespace Core
 	template <class T>
 	T& ComponentsManager::get_component(Entity entity)
 	{
-		return get_component_array<T>()->get_data(entity);
+		try
+		{
+			return get_component_array<T>()->get_data(entity);
+		}
+		catch (std::runtime_error& error)
+		{
+			std::cout << error.what() << std::endl;
+		}
 	}
 
 }

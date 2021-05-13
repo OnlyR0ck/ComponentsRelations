@@ -35,9 +35,9 @@ namespace Core
 	{
 		try
 		{
-			if (mEntity2IndexMap.find(entity) == mEntity2IndexMap.end())
+			if (mEntity2IndexMap.find(entity) != mEntity2IndexMap.end())
 			{
-				throw std::runtime_error("Данный компонент у сущности уже существует!");
+				throw std::runtime_error("Р”Р°РЅРЅС‹Р№ РєРѕРјРїРѕРЅРµРЅС‚ СѓР¶Рµ Р±С‹Р» РґРѕР±Р°Р»РµРЅ Рє СЃСѓС‰РЅРѕСЃС‚Рё!");
 			}
 		}
 		catch (std::runtime_error& error)
@@ -58,9 +58,9 @@ namespace Core
 	{
 		try
 		{
-			if (mEntity2IndexMap.find(entity) != mEntity2IndexMap.end())
+			if (mEntity2IndexMap.find(entity) == mEntity2IndexMap.end())
 			{
-				throw std::runtime_error("Попытка удалить несуществующий компонент");
+				throw std::runtime_error("РџРѕРїС‹С‚РєР° СѓРґР°Р»РёС‚СЊ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ РєРѕРјРїРѕРЅРµРЅС‚.");
 			}
 		}
 		catch (std::runtime_error& error)
@@ -85,18 +85,11 @@ namespace Core
 	template<class T>
 	T& ComponentArray<T>::get_data(Entity entity)
 	{
-		try
+		if (mEntity2IndexMap.find(entity) == mEntity2IndexMap.end())
 		{
-			if (mEntity2IndexMap.find(entity) != mEntity2IndexMap.end())
-			{
-				throw std::runtime_error("Попытка получить несуществующий компонент.");
-			}
+			throw std::runtime_error("РџРѕРїС‹С‚РєР° РїРѕР»СѓС‡РёС‚СЊ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ РєРѕРјРїРѕРЅРµРЅС‚.");
 		}
-		catch (std::runtime_error& error)
-		{
-			std::cout << error.what() << std::endl;
-			return nullptr;
-		}
+		
 
 		return mComponentsArray[mEntity2IndexMap[entity]];
 	}

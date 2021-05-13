@@ -305,6 +305,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Components\Components.cpp" />
+    <ClCompile Include="..\src\Core\EntityManager.cpp" />
     <ClCompile Include="D:\Projects\C++\ComponentsRelations\src\main.cpp" />
     <ClInclude Include="D:\Projects\C++\ComponentsRelations\src\Components\Components.hpp" />
     <ClCompile Include="D:\Projects\C++\ComponentsRelations\src\Users.cpp" />

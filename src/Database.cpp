@@ -1,10 +1,7 @@
-//
-// Created by guita on 12.04.2021.
-//
-
 #include "Database.h"
 
 const char* database_file = "Database.txt";
+
 Database::Database() = default;
 
 Database* Database::instance = nullptr;
@@ -18,15 +15,16 @@ Database* Database::get_instance()
 	return instance;
 }
 
-bool Database::check_user(User& other)
+bool Database::check_user(User & other)
 {
 	User user;
-	std::ifstream fin(database_file, std::ios::binary);
+
+	std::ifstream fin(database_file);
 	try
 	{
 		if (fin.fail())
 		{
-			throw std::runtime_error("Произошла ошибка открытия файла: ");
+			throw std::runtime_error("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°: ");
 		}
 	}
 	catch (std::runtime_error& ex)
@@ -35,32 +33,34 @@ bool Database::check_user(User& other)
 		return false;
 	}
 
-	while(fin.good())
+	std::cout << other.get_name() << " " << other.get_password() << std::endl;
+	while (fin.good())
 	{
-		fin>>user;
-		if(user==other)
+		fin >> user;
+		std::cout << "РРјСЏ :" <<user.get_name() << " РҐРµС€: " << user.get_password() << std::endl;
+		if (user == other)
 		{
-
+			return true;
 		}
 	}
 
-	return true;
+	return false;
 }
-bool Database::add_user(User& user)
+bool Database::add_user(User & user)
 {
-	std::ofstream fout(database_file, std::ios::binary | std::ios::app);
+	std::ofstream fout(database_file, std::ios::app);
 
 	if (check_for_same_login(user))
 	{
-		std::cout << "Пользователь с таким именем уже существует!" << std::endl;
+		std::cout << "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ РґР°РЅРЅС‹Рј РёРјРµРЅРµРј СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ!" << std::endl;
 		return false;
 	}
-
+	
 	try
 	{
 		if (fout.fail())
 		{
-			throw std::runtime_error("Произошла ошибка открытия файла: ");
+			throw std::runtime_error("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°: ");
 		}
 	}
 	catch (std::runtime_error& ex)
@@ -69,19 +69,19 @@ bool Database::add_user(User& user)
 		return false;
 	}
 
-	user.set_password(Hash::hash_function(user.get_password()));
 	fout << user;
 	return true;
 }
-int Database::check_for_same_login(const User& other)
+int Database::check_for_same_login(const User & other)
 {
 	User user;
-	std::ifstream fin(database_file, std::ios::binary);
+	
+	std::ifstream fin(database_file);
 	try
 	{
 		if (fin.fail())
 		{
-			throw std::runtime_error("Произошла ошибка открытия файла: ");
+			throw std::runtime_error("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°:  ");
 		}
 	}
 	catch (std::runtime_error& ex)
@@ -93,7 +93,7 @@ int Database::check_for_same_login(const User& other)
 	while (fin.good())
 	{
 		fin >> user;
-		if (user == other)
+		if (user.get_name() == other.get_name())
 		{
 			return 1;
 		}

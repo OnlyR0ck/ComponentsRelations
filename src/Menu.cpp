@@ -18,8 +18,8 @@ void Menu::set_color(int* arr, int count, int color)
 }
 void Menu::start()
 {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
+	SetConsoleCP(65001);
+	SetConsoleOutputCP(65001);
 	const char* top;
 	top = R"(
  ███▄ ▄███▓▓█████  ███▄    █  █    ██
@@ -37,11 +37,15 @@ void Menu::start()
 	char key;
 
 	add([] {}, "Выход.");
+	
+	
 	while (true)
 	{
 		gotoXY(0, 0);
 		color(4);
+		
 		std::cout << top << std::endl;
+		
 		for (int j = 0; j < size; j++)
 		{
 			gotoXY(1, 12 + j);
@@ -94,16 +98,8 @@ void Menu::add(delegate del, std::string name)
 void Menu::remove_at(int i)
 {
 	auto iter = delegates_.begin();
-
-	while (iter != delegates_.end())
-	{
-		if (*iter == delegates_.at(i))
-		{
-			delegates_.erase(iter);
-			break;
-		}
-		++iter;
-	}
+	delegates_.erase(iter + i);
+	names_.erase(names_.begin() + i);
 }
 Menu::Menu() : size(0)
 {

@@ -8,19 +8,19 @@ namespace Math
 
 	class Vector3
 	{
-	private :
+	public:
 		float x;
 		float y;
 		float z;
-	public:
-		Vector3() : x(0), y(0), z(0){}
+		
+		Vector3();
 		Vector3(float x, float y, float z);
 		Vector3(const Vector3& other);
-		static Vector3 normalize();
-		static Vector3& forward();
-		static Vector3& down();
-		static Vector3& left();
-		static Vector3& right();
+		
+		Vector3 normalized();
+		static Vector3 forward();
+		static Vector3 up();
+		static Vector3 right();
 		friend std::ostream& operator<<(std::ostream& out, Vector3& other);
 		friend std::istream& operator>>(std::istream& in, Vector3& other);
 	};
@@ -64,4 +64,7 @@ namespace Math
 		friend std::ostream& operator<<(std::ostream& out, Vector2& other);
 		friend std::istream& operator>>(std::istream& in, Vector2& other);
 	};
+
+	Vector3 get_vector();
+
 }

@@ -9,6 +9,7 @@ class IComponent
 {
 public:
 	virtual void about() = 0;
+	virtual void change_params() = 0;
 };
 
 class RigidBody : public IComponent
@@ -20,14 +21,9 @@ public:
 	Math::Vector3 velocity;
 	Math::Vector3 acceleration;
 	
-	void about() override
-	{
-		std::cout << "\nMass: " << mass
-			<< "\nIs Kinematic: " << isKinematic
-			<< "\nGravity enabled: " << useGravity
-			<< "\nVelocity: " << velocity
-			<< "\nAcceleration" << acceleration << std::endl;
-	}
+	void about() override;
+
+	void change_params() override;
 };
 
 class Transform : public IComponent
@@ -37,12 +33,8 @@ public:
 	Math::Vector3 rotation;
 	Math::Vector3 scale;
 
-	void about() override
-	{
-		std::cout << "\nPosition: " << position
-			<< "\nRotation: " << rotation
-			<< "\nScale" << scale << std::endl;
-	}
+	void about() override;
+	void change_params() override;
 };
 
 class BoxCollider : public IComponent
@@ -51,11 +43,8 @@ public:
 	Math::Vector3 center;
 	Math::Vector3 size;
 
-	void about() override
-	{
-		std::cout << "\n Center: " << center
-			<< "\nSize" << size << std::endl;
-	}
+	void about() override;
+	void change_params() override;
 };
 
 class MeshRenderer : public IComponent
@@ -63,12 +52,8 @@ class MeshRenderer : public IComponent
 public:
 	Math::Vector3 color;
 
-	void about() override
-	{
-		std::cout << "Color: " << color << std::endl;
-	}
+	void about() override;
+	void change_params() override;
 };
-
-
 
 #endif //COMPONENTSRELATIONS_SRC_COMPONENTS_H

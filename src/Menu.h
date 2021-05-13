@@ -17,7 +17,7 @@ private:
 	std::vector<std::string> names_;
 
 	void color(int color);
-	void set_color(int *, int, int );
+	void set_color(int*, int, int);
 	void gotoXY(int, int);
 public:
 	Menu();

@@ -24,6 +24,8 @@ public:
 	void set_name(std::string name);
 	std::string get_password() const;
 	void set_password(const std::string &password);
+	void set_permissions(Permissions permissions);
+	Permissions get_permissions();
 	bool operator==(const User& other);
 	friend std::ostream& operator<<(std::ostream&out, User& user);
 	friend std::istream& operator>>(std::istream& in, User& user);

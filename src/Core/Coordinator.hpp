@@ -7,7 +7,6 @@
 #include "EntityManager.hpp"
 #include "SystemManager.hpp"
 
-//#include "../src/Components/Components.hpp"
 #include "Coordinator.hpp"
 #include "../Components/Components.hpp"
 

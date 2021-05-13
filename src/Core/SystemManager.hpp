@@ -66,7 +66,7 @@ namespace Core
 		{
 			if (mSystems.find(typeName) == mSystems.end())
 			{
-				throw std::runtime_error("Данная система уже зарегистрирована.");
+				throw std::runtime_error("РЎРёСЃС‚РµРјР° СѓР¶Рµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅР°.");
 			}
 		}
 		catch (std::runtime_error& error)
@@ -89,7 +89,7 @@ namespace Core
 		{
 			if (mSystems.find(typeName) != mSystems.end())
 			{
-				throw std::runtime_error("Использование системы до её регистрации.");
+				throw std::runtime_error("РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ СЃРёСЃС‚РµРјС‹ РґРѕ РµС‘ СЂРµРіРёСЃС‚СЂР°С†РёРё.");
 			}
 		}
 		catch (std::runtime_error& error)
